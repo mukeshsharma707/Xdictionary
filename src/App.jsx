@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 
 function App() {
   const [data, setData] = useState('');
+  const [search,setSearch]=useState(false);
   const[allData,setAllData]=useState([
 
     { word: "React", meaning: "A JavaScript library for building user interfaces." },
@@ -21,6 +22,7 @@ const handleSearch=()=>{
 const result=allData.filter((item)=>
 item.word.toLowerCase() == data.toLowerCase());
 setDefinition(result);
+setSearch(true);
 
 }
 
@@ -39,7 +41,7 @@ console.log(e.target.value);
     <button onClick={handleSearch}> Search</button>
     <br/>
     <label><h3>Definition:</h3></label>
-    {definition>0?(<p>{definition[0].meaning}</p>):(<p>Word not found in the dictionary.</p>)}
+    {!search?(<p>Type a word and search</p>):definition.length>0?(<p>{definition[0].meaning}</p>):(<p>Word not found in the dictionary.</p>)}    
     
     </>
   )
